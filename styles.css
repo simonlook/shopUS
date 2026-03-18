@@ -1,9 +1,18 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
+body{
+    background:linear-gradient(45deg, rgba(172, 93, 19, 0.6),rgba(172, 93, 19, 0.6)) ;
+}
+/* img{
+    display: block;
+    height: auto;
+    min-width: 100%;
+} */
 .navbar{
-    background-color: orange;
+    background-color:rgba(172, 93, 19, 1); 
     display: flex;
     flex-direction: row;
     justify-content:space-between;
@@ -11,11 +20,26 @@
     padding-right: 100px;
     padding-top: 20px;
     padding-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 .logo{
-    width: 100px;
-    height: 100px;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
+}
+.logo span{
+    font-weight: 800;
+    font-size: 32px;
+    color: white;
+}
+.logo img{
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+    background-color: white;
 }
 #navLinks{
     display: flex;
@@ -29,6 +53,201 @@
 }
 #navLinks li a{
     text-decoration: none;
-    color: black;
+    color: white;
     font-size: 25px;
+}
+#navLinks li a:hover{
+    color: darkblue;
+}
+.hero-section{
+    background:linear-gradient(rgba(22, 22, 181, 0.4)), url(Images/lojinha.jpg);
+    min-height: 80vh;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.hero-section .hero-text{
+    max-width:70% ;
+    text-align: center;
+    margin: auto;
+    transform: translateY(50px);
+    padding: 20px 50px;
+    color: aliceblue;
+}
+.hero-section .hero-text h2{
+    font-size: 60px;
+    font-weight: 900;
+}
+.hero-section .hero-text p{
+    font-size: 30px;
+    font-weight: 400;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.hero-section .hero-text button{
+    font-size: 30px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+}
+.hero-section .hero-text button:hover{
+    background-color: grey;
+    color: white;
+    cursor: pointer;
+}
+
+/* PRODUCT SECTION */
+.product-section, .about-section,.cart-section{
+    padding: 0 100px;
+    min-height: 100vh;
+    margin: 50px auto 0 auto;
+}
+.product-section h2{
+    text-align: center;
+    font-size: 40px;
+}
+.product-section h3{
+    text-align: center;
+    font-size: 30px;
+    background: orange;
+    margin: 30px auto;
+    width: 100%;
+    padding: 10px;
+}
+.men , .ladies, .children{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.men div, .ladies div, .children div{
+    border: 2px solid grey;
+   min-width: 200px;
+   border-radius: 10px;
+   background-color: white;
+}
+.men img, .ladies img, .children img{
+    min-width: 100%;
+    height: 200px;
+    border-bottom: 1px solid grey;
+    border-radius: 10px 10px 0 0;
+}
+.product-section div h4{
+    font-size: 25px;
+    text-align: center;
+    margin-top: 10px;
+}
+.product-section div p{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.product-section div button{
+   margin: 10px auto 20px;
+   display: block;
+   text-align: center;
+   padding: 10px 20px;
+   border-radius: 30px;
+   border: none;
+   background-color: rgba(156, 151, 151, 0.4);
+}
+
+/* CONTACT PAGE */
+.contact-section h2{
+    text-align: center;
+    font-size: 40px;
+}
+.contact-section{
+    padding: 0 100px;
+    min-height: 80vh;
+    margin: 50px auto 0 auto;
+}
+.contact-section form{
+    border: 5px double rgb(0, 0, 0);
+    border-radius: 20px;
+    text-align: center;
+    margin: 20px auto 0 auto;
+    padding: 30px 20px;
+    width: 50%;
+}
+.contact-section form label,.contact-section form input{
+    margin: 20px 5px;
+}
+.contact-section form label{
+    font-size: 25px;
+}
+.contact-section form input, textarea, form button{
+    font-size: 20px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: aliceblue;
+}
+.contact-section form button{
+    display: block;
+    margin: 30px auto 0 auto;
+    padding: 5px 50px;
+    background-color: black;
+    color: white;
+}
+.contact-section form textarea{
+    resize: none;
+    padding: 10px 50px;
+}
+/* ABOUT US SECTION */
+.about-section{
+    padding: 0 100px;
+    min-height: 80vh;
+    margin: 50px auto 0 auto;
+}
+.about-section h2{
+    text-align: center;
+    font-size: 40px;
+}
+
+/* CART PAGE */
+.cart-section{
+    padding: 0 100px;
+    min-height: 80vh;
+    margin: 50px auto 0 auto;
+}
+.cart-section h2{
+    text-align: center;
+    font-size: 40px;
+}
+
+/* FOOTER */
+.footer{
+    width: 100%;
+    background-color: rgba(172, 93, 19, 1);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 20px 100px;
+}
+.footer h3{
+    font-size: 25px;
+}
+.footer li i{
+    font-size: 30px;
+}
+.footer li{
+    list-style: none;
+}
+.footer img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: white;
+}
+.footer-logo{
+     display: flex;
+    gap: 2px;
+    align-items: center;
+}
+.footer span{
+    font-weight: 800;
+    font-size: 32px;
+    color: white;
 }
