@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body{
-    background:linear-gradient(45deg, rgba(172, 93, 19, 0.6),rgba(172, 93, 19, 0.6)) ;
+    background:rgba(172, 93, 19, 0.6) ;
 }
 /* img{
     display: block;
