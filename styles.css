@@ -1,3 +1,4 @@
+/* General Reset */
 *{
     margin: 0;
     padding: 0;
@@ -5,12 +6,9 @@
 }
 body{
     background:rgba(172, 93, 19, 0.6) ;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
 }
-/* img{
-    display: block;
-    height: auto;
-    min-width: 100%;
-} */
 .navbar{
     background-color:rgba(172, 93, 19, 1); 
     display: flex;
@@ -198,7 +196,7 @@ body{
 /* ABOUT US SECTION */
 .about-section{
     padding: 0 100px;
-    min-height: 80vh;
+    min-height: 50vh;
     margin: 50px auto 0 auto;
 }
 .about-section h2{
@@ -221,19 +219,19 @@ body{
 .footer{
     width: 100%;
     background-color: rgba(172, 93, 19, 1);
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
     padding: 20px 100px;
+}
+.footer-section{
+    display: flex;
+    flex-flow: nowrap;
+    justify-content: space-between;
 }
 .footer h3{
     font-size: 25px;
+    text-align: center;
 }
-.footer li i{
+.footer i{
     font-size: 30px;
-}
-.footer li{
-    list-style: none;
 }
 .footer img{
     width: 50px;
@@ -241,13 +239,110 @@ body{
     border-radius: 50%;
     background-color: white;
 }
-.footer-logo{
-     display: flex;
-    gap: 2px;
-    align-items: center;
-}
 .footer span{
     font-weight: 800;
     font-size: 32px;
     color: white;
+}
+.footer .social-media , .payment-methods , .branches{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+ .footer .footer-branches{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+ }
+ .footer .copy{
+    text-align: center;
+    margin: 10px 0;
+ }
+/*  .branches .payment-methods p img{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+ } */
+
+/* Sections */
+
+/* section {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+} */
+
+/* About Section */
+.about-section h2{
+    text-align: center;
+    font-size: 40px;
+}
+.about-us{
+    border: 5px double black;
+    border-radius: 20px;
+    text-align: center;
+    margin: 20px auto 0 auto;
+    padding: 30px 20px;
+    width: 70%;
+}
+.about-us h3{
+    font-size: 25px;
+}
+/* Cart Section */
+.cart-section{
+    padding: 0 100px;
+    min-height: 80vh;
+    margin: 50px auto 0 auto;
+}
+.cart-section h2{
+    text-align: center;
+    font-size: 40px;
+    color: black;
+}
+
+.cart-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.cart-section th,
+.cart-section td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-section th {
+    background-color: #2c3e50;
+    color: #fff;
+}
+
+.cart-section tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Total */
+.cart-section h2 {
+    margin-top: 20px;
+    color: black;
+}
+
+/* Button */
+button {
+    margin-top: 15px;
+    padding: 12px 20px;
+    border: none;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
 }
