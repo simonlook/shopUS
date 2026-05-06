@@ -1,11 +1,19 @@
+<?php
+    include "Loging/db.php";
+
+    $sql = "select * from products";
+    $result = mysqli_query($conn,$sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShopUS</title>
-    <link rel="icon" href="Images/Juice.jpg">
+    <link rel="icon" href="Images/Shopping app icon.jpg">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
     <link
   href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
   rel="stylesheet"
@@ -18,7 +26,7 @@
         </div>
             <ul id="navLinks">
                 <li>
-                    <a href="#home">Home</a>
+                    <a href="#">Home</a>
                 </li>
                 <li>
                     <a href="#product">Product</a>
@@ -30,7 +38,10 @@
                     <a href="#about">About Us</a>
                 </li>
                 <li>
-                    <a href="cart.html">Cart</a>
+                    <input type="text" name="" id="search" placeholder="Search products..."> 
+                </li>
+                <li>
+                    <a href="Loging/login.php">Admin Login</a>
                 </li>
             </ul>
         </nav>
@@ -45,20 +56,27 @@
         <h2>Our Products</h2>
         <h3>Men's Collection</h3>
         <div class="men">
-            <div> 
-                <img src="Images/shirt.jpg" alt="shirt" width="100">
-                <h4>Shirt</h4>
-                <p>$255.88</p>
-                <button>Add to cart</button>
+            <?php  while($row = mysqli_fetch_assoc($result)){
+        ?>
+            <div class="product"> 
+                <div class="image-container">
+                    <img src="Images4Kids/<?php echo $row['image'] ?>" alt="shirt">
+                </div>
+                <h4><?php echo $row['name'] ?></h4>
+                <p> $<?php echo $row['price'] ?></p>
+                <button onclick="showAdded();cartCount()">Add to cart (<span id="cartCount">0</span>)</button>
             </div>
-            <div>
-                <img src="Images/Riolio Men Dressing Shoes Formal for Men's Casual Shoe Leather Social Wedding Designer Pointed Toe Black Office Winter Shoes Brand - Brown _ 41.jpg" alt="shirt" width="100">
+        <?php  
+        }
+        ?>
+            <!-- <div>
+                <div class="image-container"><img src="Images/Riolio Men Dressing Shoes Formal for Men's Casual Shoe Leather Social Wedding Designer Pointed Toe Black Office Winter Shoes Brand - Brown _ 41.jpg" alt="shirt"> </div>
                 <h4>Shoes</h4>
                 <p>$255.88</p>
                 <button>Add to cart</button>
             </div>
             <div>
-                <img src="Images/Men's Double LA Jeans.jpg" alt="shirt" width="100">
+                <div class="image-container"><img src="Images/Men's Double LA Jeans.jpg" alt="shirt"></div>
                 <h4>Jeans</h4>
                 <p>$255.88</p>
                 <button>Add to cart</button>
@@ -158,23 +176,23 @@
                 <h4>Ankara</h4>
                 <p>$255.88</p>
                 <button>Add to cart</button>
-            </div>
+            </div> -->
         </div>
     </section>
     <section class="contact-section" id="contact">
         <h2>Contact Us</h2>
-        <form>
+        <form  onsubmit='validateForm()'>
             <label for="name">Full Name:</label>
-            <input type="text" placeholder="your full name"> <br> <br>
+            <input type="text" placeholder="your full name"> <br> 
             <label for="email">Email:</label>
-            <input type="email" placeholder="someone@gmail.com"> <br> <br>
+            <input type="email" placeholder="someone@gmail.com"> <br>
             <label for="gender">Gender: </label>
             <input type="radio" name="gender" id="male">
             <label for="male">Male</label>
             <input type="radio" name="gender" id="female">
-            <label for="female">Female</label> <br> <br>
+            <label for="female">Female</label> <br>
             <label for="phone">Phone: </label>
-            <input type="tel" placeholder="+256-000-000-000"> <br> <br>
+            <input type="tel" placeholder="+256-000-000-000"> <br> 
             <label for="message">Message: </label>
             <textarea name="" id="" placeholder="your message here"></textarea>
             <button type="submit">Submit</button>
@@ -187,13 +205,15 @@
         <div class="about-us">
             <div>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, quis. Deserunt rerum esse nam non repellendus neque totam magni dolorem ad, incidunt, animi eaque, natus nisi dolores facere temporibus fuga?
+                We are ShopUS — a modern clothing brand dedicated to bringing you stylish, affordable, and high-quality fashion for every occasion. 
+                Our collections are carefully curated to reflect current trends while ensuring comfort and confidence in every piece you wear
+                At ShopUS, we believe fashion is more than just clothing — it’s a way to express who you are. That’s why we focus on delivering designs that are versatile, unique, and made to fit your lifestyle
             </p>
         </div>
         <div>
            <h3> Our Address</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur 
-            adipisicing elit. Sunt molestiae animi quisquam id ducimus minus ratione a aspernatur at illo?
+            <p>
+                Head Office <br> ShopUS Ltd Plot 12, <br> Kampala Road Kampala, Uganda <br> Phone: +256 780512605 <br> Email: shopus@gmail.com
             </p>
         </div>
         </div>
@@ -272,6 +292,42 @@
  </section>
  <p>&copy; All rights reserved -ShopUs</p>
  </footer>
- 
+ <script>
+    //JavaScript
+   function validateForm(){
+    let email = document.querySelector("input[type = 'email']").value;
+    if(!email.includes('@gmail.com')){
+        alert("Enter a valid email! (@gmail.com symbol missing)");
+        return false;
+    }
+    }
+
+    function showAdded(){
+        let added = document.createElement("div");
+        added.innerText = "Added to cart";
+        added.style.position = "fixed";
+        added.style.bottom = "20px"
+        added.style.right = "20px"
+        added.style.backgroundColor = "brown";
+        added.style.color = "white"
+        added.style.padding = "10px"
+        document.body.appendChild(added);
+        setTimeout(() => added.remove(),2000);
+    }
+
+    
+
+    /* JS Rotating Image  */
+    const imgSlider = document.querySelectorAll(".image-container");
+    imgSlider.forEach(img => {
+        img.addEventListener("mouseover",() =>{
+            img.style.transform = "scale(1.1)"
+            /* img.style.transform = "rotate(10deg)" */
+        })
+        img.addEventListener("mouseout",() =>{
+            img.style.transform = "scale(1)"
+        })
+    })
+ </script>
 </body>
 </html>
