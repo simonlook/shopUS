@@ -1,26 +1,33 @@
-<?php 
+<?php
+
 include "db.php";
 //set session
-
+$update = $_GET['updateID'];
 $successMessage = "";
-if(isset($_POST['add'])){
+
+$sql1 = "SELECT image,name,price from products where productID = '$update'";
+$result1 = mysqli_query($conn,$sql1);
+$row = mysqli_fetch_assoc($result1);
+
+if(isset($_POST['update'])){
     $name = $_POST['name'];
     $price = $_POST['price'];
     $image = $_FILES['image']['name'];
     $temp_location = $_FILES['image']['tmp_name'];
     $upload_location = "../Images4Kids/";
 
-    $sql = "insert into products(image,name,price) values('$image','$name','$price')";
+    $sql = "UPDATE products SET image = '$image', name = '$name' , price = '$price'
+    where productID  = '$update' ";
 
     $result = mysqli_query($conn,$sql);
+
     if(!$result){
-        echo "Error: ";
-    }
-    else{
-        $successMessage = "Product added successfully!";
+    die(mysqli_error($conn));
+}
+else{
+        $successMessage = "Product updated successfully!";
         move_uploaded_file($temp_location,$upload_location.$image);
     }
-
 }
 ?>
 <!DOCTYPE html>
@@ -71,50 +78,36 @@ if(isset($_POST['add'])){
         .body p{
             margin-top: 30px;
         }
-
-
-/* CARD */
-.wrapper{
-    width: 420px;
+/* FORM CONTAINER */
+form{
+    width: 400px;
     background: white;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    margin: 30px auto;
-}
-
-/* DESCRIPTION */
-.wrapper p{
-    color: #555;
-    line-height: 1.6;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* FORM */
-form{
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin: 10px auto;
 }
-
-/* TITLE */
-form h2{
-    text-align: center;
-    color: #333;
-    margin-bottom: 10px;
+/* IMAGE PREVIEW */
+    img{
+    width: 180px;
+    object-fit: cover;
+    margin: auto;
+    border-radius: 10px;
+    border: 2px solid #ddd;
 }
 
 /* INPUTS */
 form input[type="text"],
 form input[type="number"],
 form input[type="file"]{
-    padding: 12px;
-    border: 1px solid gray;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 8px;
     outline: none;
-    font-size: 16px;
-    background: white;
+    font-size: 15px;
 }
 
 /* INPUT FOCUS */
@@ -124,7 +117,7 @@ form input:focus{
 
 /* BUTTON */
 form input[type="submit"]{
-    padding: 12px;
+    padding: 10px;
     border: none;
     border-radius: 8px;
     background: gray;
@@ -139,7 +132,6 @@ form input[type="submit"]:hover{
     background: black;
     color: white;
 }
-
 /* SUCCESS MESSAGE */
 .success{
     background: #e8f7e8;
@@ -149,8 +141,9 @@ form input[type="submit"]:hover{
     text-align: center;
     font-size: 14px;
 }
-        
     </style>
+
+
 </head>
 <body>
     <div class="header">
@@ -163,22 +156,18 @@ form input[type="submit"]:hover{
             <li><a href="#">View Users</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
-    <div class="wrapper">
+    <div>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tempora obcaecati eveniet illum, porro iusto quisquam soluta assumenda omnis animi.</p>
-        <form action="add.php" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
         <h2>Upload Image Here!</h2>
         <input type="file" name="image" id="" required>
-        <input type="text" name="name" placeholder="Enter your name" required>
-        <input type="number" name="price" placeholder="Enter price here!" required>
-        <input type="submit" value="Add" name="add">
-    <div class="success">
-        <?php 
-            if(!empty($successMessage)){
-                echo $successMessage;
-            }
-        ?>
-    </div>
-        
+        <img src="../Images4Kids/<?php echo $row['image'] ?>" alt="" width="200">
+        <input type="text" name="name" placeholder="Enter your name" value="<?php echo $row['name']  ?>">
+        <input type="number" name="price" placeholder="Enter price here!" value="<?php echo $row['price']  ?>">
+        <input type="submit" value="update" name="update">
+        <div class="success">
+            <?php echo $successMessage ?>
+        </div>
     </form>
     </div>
     </div>

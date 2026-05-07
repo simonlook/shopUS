@@ -1,13 +1,13 @@
 <?php
 include "db.php";
-    if(isset($_GET['productID'])){
-        $productID = $_GET['productID'];
-        $sql = "delete from products where productID = '$productID'";
+    if(isset($_GET['deleteID'])){
+        $productID = $_GET['deleteID'];
+        $sql = "DELETE FROM products WHERE productID = $productID";
         $result = mysqli_query($conn,$sql);
-        if(!$result){
-            echo "Error!: {$conn->error}";
+        if($result){
+            header("Location: display.php");
         }
     }else{
-        echo "Deleted Successfully";
+        echo "An error occured ";
     }
 ?>

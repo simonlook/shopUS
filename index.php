@@ -38,9 +38,6 @@
                     <a href="#about">About Us</a>
                 </li>
                 <li>
-                    <input type="text" name="" id="search" placeholder="Search products..."> 
-                </li>
-                <li>
                     <a href="Loging/login.php">Admin Login</a>
                 </li>
             </ul>
@@ -54,7 +51,7 @@
     </section>
     <section class="product-section product" id="product">
         <h2>Our Products</h2>
-        <h3>Men's Collection</h3>
+        <h3>Checkout Our Collection</h3>
         <div class="men">
             <?php  while($row = mysqli_fetch_assoc($result)){
         ?>
