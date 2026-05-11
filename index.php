@@ -16,8 +16,7 @@
     <link rel="stylesheet" href="styles2.css">
     <link
   href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
-  rel="stylesheet"
-    />
+  rel="stylesheet"/>
 </head>
 <body>
     <nav class="navbar">
@@ -61,7 +60,7 @@
                 </div>
                 <h4><?php echo $row['name'] ?></h4>
                 <p> $<?php echo $row['price'] ?></p>
-                <button onclick="showAdded();cartCount()">Add to cart (<span id="cartCount">0</span>)</button>
+                <button onclick="showAdded()">Add to cart <!-- (<span id="cartCount">0</span>) --></button>
             </div>
         <?php  
         }
@@ -178,21 +177,21 @@
     </section>
     <section class="contact-section" id="contact">
         <h2>Contact Us</h2>
-        <form  onsubmit='validateForm()'>
+        <form  onsubmit='validateForm()' method="POST" action="users.php">
             <label for="name">Full Name:</label>
-            <input type="text" placeholder="your full name"> <br> 
+            <input type="text" placeholder="your full name" name="userName"> <br> 
             <label for="email">Email:</label>
-            <input type="email" placeholder="someone@gmail.com"> <br>
+            <input type="email" placeholder="someone@gmail.com" name="email"> <br>
             <label for="gender">Gender: </label>
-            <input type="radio" name="gender" id="male">
+            <input type="radio" name="gender" value="male" id="male">
             <label for="male">Male</label>
-            <input type="radio" name="gender" id="female">
+            <input type="radio" name="gender" value="female" id="female">
             <label for="female">Female</label> <br>
             <label for="phone">Phone: </label>
-            <input type="tel" placeholder="+256-000-000-000"> <br> 
+            <input type="tel" placeholder="+256-000-000-000" name="phone"> <br> 
             <label for="message">Message: </label>
-            <textarea name="" id="" placeholder="your message here"></textarea>
-            <button type="submit">Submit</button>
+            <textarea name="message" id="" placeholder="your message here"></textarea>
+            <button type="submit" name="submit">Submit</button>
         </form>
     </section>
 
@@ -243,7 +242,7 @@
             </tr>
         </table>
     <h2>Total: $4343</h2>
-    <button>Checkout</button>
+    <button class="checkButton" onclick="checkButton()">Pay Now</button>
     </section>
 
     <footer class="footer" >
@@ -289,8 +288,17 @@
  </section>
  <p>&copy; All rights reserved -ShopUs</p>
  </footer>
+
+
  <script>
     //JavaScript
+    function checkButton(){
+    const btn = document.querySelector(".checkButton")
+    btn.innerText = 'Payment underway..........'
+    btn.style.backgroundColor = 'green'
+    btn.style.color = 'white'
+}
+
    function validateForm(){
     let email = document.querySelector("input[type = 'email']").value;
     if(!email.includes('@gmail.com')){
@@ -314,7 +322,7 @@
 
     
 
-    /* JS Rotating Image  */
+    /* JS Scaling Image  */
     const imgSlider = document.querySelectorAll(".image-container");
     imgSlider.forEach(img => {
         img.addEventListener("mouseover",() =>{

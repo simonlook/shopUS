@@ -3,6 +3,8 @@ include "db.php";
 //set session
 
 $successMessage = "";
+$failMessage = "";
+
 if(isset($_POST['add'])){
     $name = $_POST['name'];
     $price = $_POST['price'];
@@ -14,7 +16,7 @@ if(isset($_POST['add'])){
 
     $result = mysqli_query($conn,$sql);
     if(!$result){
-        echo "Error: ";
+        $failMessage = "Error,product not added";
     }
     else{
         $successMessage = "Product added successfully!";
@@ -141,7 +143,7 @@ form input[type="submit"]:hover{
 }
 
 /* SUCCESS MESSAGE */
-.success{
+.success, .failure{
     background: #e8f7e8;
     color: green;
     padding: 10px;
@@ -160,10 +162,17 @@ form input[type="submit"]:hover{
     <ul>
             <li><a href="add.php">Add Products</a></li>
             <li><a href="display.php">View Products</a></li>
-            <li><a href="#">View Users</a></li>
+            <li><a href="../users.php">View Users</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     <div class="wrapper">
+        <div class="failure">
+            <?php 
+        if(!empty($failMessage)){
+            echo $failMessage;
+        }
+        ?>
+        </div>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tempora obcaecati eveniet illum, porro iusto quisquam soluta assumenda omnis animi.</p>
         <form action="add.php" method="POST" enctype="multipart/form-data">
         <h2>Upload Image Here!</h2>

@@ -49,8 +49,7 @@
         }
         .body p{
             margin-top: 30px;
-        }
-        
+        } 
     </style>
 </head>
 <body>
@@ -61,7 +60,7 @@
     <ul>
             <li><a href="add.php">Add Products</a></li>
             <li><a href="display.php">View Products</a></li>
-            <li><a href="#">View Users</a></li>
+            <li><a href="../users.php">View Users</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     <div>

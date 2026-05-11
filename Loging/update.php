@@ -1,9 +1,10 @@
 <?php
 
 include "db.php";
-//set session
+
 $update = $_GET['updateID'];
 $successMessage = "";
+$failMessage = "";
 
 $sql1 = "SELECT image,name,price from products where productID = '$update'";
 $result1 = mysqli_query($conn,$sql1);
@@ -22,7 +23,7 @@ if(isset($_POST['update'])){
     $result = mysqli_query($conn,$sql);
 
     if(!$result){
-    die(mysqli_error($conn));
+    $failMessage = "Error,Product not updated!";
 }
 else{
         $successMessage = "Product updated successfully!";
@@ -157,6 +158,9 @@ form input[type="submit"]:hover{
             <li><a href="logout.php">Logout</a></li>
         </ul>
     <div>
+        <div class="success">
+            <?php echo $failMessage ?>
+        </div>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tempora obcaecati eveniet illum, porro iusto quisquam soluta assumenda omnis animi.</p>
         <form action="" method="POST" enctype="multipart/form-data">
         <h2>Upload Image Here!</h2>

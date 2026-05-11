@@ -1,15 +1,40 @@
+<?php
+include "Loging/db.php";
+
+if(isset($_POST['submit'])){
+    $userName = $_POST['userName'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $gender = $_POST['gender'];
+    $message = $_POST['message'];
+
+    if($userName == '' || $email == '' || $gender == '' || $phone == '' || $message == ''){
+        echo 'You must insert into all fields';
+        header("Location: index.php");
+    }
+    else{
+        $sql = "INSERT INTO users(userName,email,gender,phone,message) VALUES ('$userName','$email','$gender','$phone','$message')";
+        $result = mysqli_query($conn,$sql);
+        header("Location: index.php");
+    }
+}
+
+?>
+
 <?php 
 
-include "db.php";
-
-$sql = "select * from products";
+$sql = "select * from users";
 $result = mysqli_query($conn,$sql);
     if(!$result){
         echo "Error: ";
     }
-    else{     
+    else{
+       
     }
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -144,23 +169,23 @@ $result = mysqli_query($conn,$sql);
     </div>
     <div class="body">
     <ul>
-            <li><a href="add.php">Add Products</a></li>
-            <li><a href="display.php">View Products</a></li>
-            <li><a href="../users.php">View Users</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="Loging/add.php">Add Products</a></li>
+            <li><a href="Loging/display.php">View Products</a></li>
+            <li><a href="users.php">View Users</a></li>
+            <li><a href="Loging/logout.php">Logout</a></li>
         </ul>
     <div>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum tempora obcaecati eveniet illum, porro iusto quisquam soluta assumenda omnis animi.</p>
         <div class="product-section">
      <?php  while($row = mysqli_fetch_assoc($result)){ ?>
             <div class="product"> 
-                <div class="image-container">
-                    <img src="../Images4Kids/<?php echo $row['image'] ?>" alt="shirt">
-                </div>
-                <h4><?php echo $row['name'] ?></h4>
-                <p> $<?php echo $row['price'] ?></p>
-                <p><a href="update.php?updateID=<?php echo $row['productID'];?>" class="update">Update</a></p>
-                <p><a href="delete.php?deleteID=<?php echo $row['productID'];?>" class="delete">Delete</a></p>
+                <h4>UserName: <?php echo $row['userName'] ?></h4>
+                <p> Email: <?php echo $row['email'] ?></p>
+                <p> Gender: <?php echo $row['gender'] ?></p>
+                <p> Phone: <?php echo $row['phone'] ?></p>
+                <p> Message: <?php echo $row['message'] ?></p>
+                <p><a href="#" class="update">Update</a></p>
+                <p><a href="#" class="delete">Delete</a></p>
             </div>
         <?php  } ?>
         </div>
